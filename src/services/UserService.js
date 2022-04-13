@@ -15,4 +15,13 @@ const createUser = async (displayName, email, password, image) => {
   }
 };
 
-module.exports = { createUser };
+const emailAlreadyRegistered = async (email) => {
+  try {
+    const registered = await User.findOne({ where: { email } });
+    if (registered) return true;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createUser, emailAlreadyRegistered };
