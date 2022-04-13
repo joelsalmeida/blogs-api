@@ -1,3 +1,4 @@
+// Reference: https://www.w3resource.com/javascript/form/email-validation.php
 const emailRegEx = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 const isAbsent = (value) => !value && typeof value !== 'number';
