@@ -19,4 +19,10 @@ router.get(
   UserController.getUsers,
 );
 
+router.get(
+  '/:id',
+  login.authMiddleware,
+  UserController.getUserById,
+);
+
 module.exports = router;

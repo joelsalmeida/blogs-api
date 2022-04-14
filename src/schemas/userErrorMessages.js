@@ -1,3 +1,7 @@
+const user = {
+  notFound: 'User does not exist',
+};
+
 const name = {
   charactersLong: '"displayName" length must be at least 8 characters long',
 };
@@ -13,4 +17,4 @@ const password = {
   charactersLong: '"password" length must be 6 characters long',
 };
 
-module.exports = { name, email, password };
+module.exports = { user, name, email, password };

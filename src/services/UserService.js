@@ -32,4 +32,12 @@ const getUsers = async () => {
   }
 };
 
-module.exports = { createUser, getUsers, emailAlreadyRegistered };
+const getUserById = async (id) => {
+  try {
+    return await User.findOne({ where: { id } });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createUser, getUsers, getUserById, emailAlreadyRegistered };

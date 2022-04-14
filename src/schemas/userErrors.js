@@ -1,6 +1,13 @@
 const { statusCode } = require('./statusCodes');
 const errorMessage = require('./userErrorMessages');
 
+const user = {
+  notFound: {
+    code: statusCode.notFound,
+    message: errorMessage.user.notFound,
+  },
+};
+
 const email = {
   required: {
     code: statusCode.badRequest,
@@ -34,4 +41,4 @@ const password = {
   },
 };
 
-module.exports = { email, name, password };
+module.exports = { user, email, name, password };
