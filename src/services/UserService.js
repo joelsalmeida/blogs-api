@@ -1,6 +1,15 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
+const emailAlreadyRegistered = async (email) => {
+  try {
+    const registered = await User.findOne({ where: { email } });
+    if (registered) return true;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const createUser = async (displayName, email, password, image) => {
   try {
     await User.create({ displayName, email, password, image });
@@ -15,13 +24,12 @@ const createUser = async (displayName, email, password, image) => {
   }
 };
 
-const emailAlreadyRegistered = async (email) => {
+const getUsers = async () => {
   try {
-    const registered = await User.findOne({ where: { email } });
-    if (registered) return true;
+    return await User.findAll();
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = { createUser, emailAlreadyRegistered };
+module.exports = { createUser, getUsers, emailAlreadyRegistered };
