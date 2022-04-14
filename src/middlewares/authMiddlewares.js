@@ -14,8 +14,8 @@ const authMiddleware = async (req, _res, next) => {
     
     if (registered) return next();
   } catch (error) {
-    if (error.message === 'invalid token') return next(err.user.invalid);
     console.log(error);
+    return next(err.user.invalid);
   }
 };
 
