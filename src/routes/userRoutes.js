@@ -5,7 +5,7 @@ const router = express.Router();
 const UserController = require('../controllers/UserController');
 
 const user = require('../validations/userValidations');
-const login = require('../middlewares/authMiddlewares');
+const { authMiddleware } = require('../middlewares/authMiddlewares');
 
 router.post(
   '/',
@@ -13,16 +13,8 @@ router.post(
   UserController.createUser,
 );
 
-router.get(
-  '/',
-  login.authMiddleware,
-  UserController.getUsers,
-);
+router.get('/', authMiddleware, UserController.getUsers);
 
-router.get(
-  '/:id',
-  login.authMiddleware,
-  UserController.getUserById,
-);
+router.get('/:id', authMiddleware, UserController.getUserById);
 
 module.exports = router;
