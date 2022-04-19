@@ -11,4 +11,8 @@ const category = {
   invalid: '"categoryIds" not found',
 };
 
-module.exports = { title, content, category };
+const post = {
+  invalid: 'Post does not exist',
+};
+
+module.exports = { title, content, category, post };

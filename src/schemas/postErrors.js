@@ -26,4 +26,11 @@ const category = {
   },
 };
 
-module.exports = { title, content, category };
+const post = {
+  invalid: {
+    code: statusCode.notFound,
+    message: errorMessage.post.invalid,
+  },
+};
+
+module.exports = { title, content, category, post };
