@@ -28,4 +28,17 @@ const getPosts = async () => {
   }
 };
 
-module.exports = { createPost, getPosts };
+const getPostById = async (id) => {
+  try {
+    const posts = await BlogPost.findOne({
+      where: { id },
+      include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories' }],
+    });
+    return posts;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createPost, getPosts, getPostById };
