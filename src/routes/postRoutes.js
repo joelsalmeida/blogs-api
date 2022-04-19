@@ -16,4 +16,10 @@ router.post(
   PostController.createPost,
 );
 
+router.get(
+  '/',
+  authMiddleware,
+  PostController.getPosts,
+);
+
 module.exports = router;
