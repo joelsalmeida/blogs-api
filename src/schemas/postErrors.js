@@ -24,6 +24,10 @@ const category = {
     code: statusCode.badRequest,
     message: errorMessage.category.invalid,
   },
+  cantBeEdited: {
+    code: statusCode.badRequest,
+    message: errorMessage.category.cantBeEdited,
+  },
 };
 
 const post = {
@@ -33,4 +37,11 @@ const post = {
   },
 };
 
-module.exports = { title, content, category, post };
+const user = {
+  unauthorized: {
+    code: statusCode.unauthorized,
+    message: errorMessage.user.unauthorized,
+  },
+};
+
+module.exports = { user, title, content, category, post };

@@ -1,3 +1,7 @@
+const user = {
+  unauthorized: 'Unauthorized user',
+};
+
 const title = {
   required: '"title" is required',
 };
@@ -9,10 +13,11 @@ const content = {
 const category = {
   required: '"categoryIds" is required',
   invalid: '"categoryIds" not found',
+  cantBeEdited: 'Categories cannot be edited',
 };
 
 const post = {
   invalid: 'Post does not exist',
 };
 
-module.exports = { title, content, category, post };
+module.exports = { user, title, content, category, post };
