@@ -22,4 +22,10 @@ router.get(
   PostController.getPosts,
 );
 
+router.get(
+  '/:id',
+  authMiddleware,
+  PostController.getPostById,
+);
+
 module.exports = router;

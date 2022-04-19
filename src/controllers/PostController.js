@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const PostService = require('../services/PostService');
 const { User } = require('../models');
+const err = require('../schemas/postErrors');
 
 const createPost = async (req, res) => {
   const { title, content, categoryIds } = req.body;
@@ -27,4 +28,15 @@ const getPosts = async (_req, res) => {
   }
 };
 
-module.exports = { createPost, getPosts };
+const getPostById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const post = await PostService.getPostById(id);
+    if (!post) return next(err.post.invalid);
+    return res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createPost, getPosts, getPostById };
