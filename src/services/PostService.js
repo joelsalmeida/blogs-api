@@ -60,4 +60,22 @@ const updatePost = async (email, id, updates) => {
   }
 };
 
-module.exports = { createPost, getPosts, getPostById, updatePost };
+const deletePost = async (email, id) => {
+  try {
+    const { dataValues: { id: userId } } = await User.findOne({ where: { email } });
+    
+    const post = async () => BlogPost.findOne({ where: { id },
+      include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } }],
+    });
+    const { dataValues: { userId: postUserId } } = await post();
+
+    if (!await post()) return null;
+    if (postUserId !== userId) return { unauthorized: 'Unauthorized' };
+    
+    return await BlogPost.destroy({ where: { id } });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createPost, getPosts, getPostById, updatePost, deletePost };
