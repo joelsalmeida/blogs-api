@@ -57,4 +57,21 @@ const updatePost = async (req, res, next) => {
   }
 };
 
-module.exports = { createPost, getPosts, getPostById, updatePost };
+const deletePost = async (req, res, next) => {
+  const { authorization } = req.headers;
+  const { data: { email } } = jwt.verify(authorization, process.env.JWT_SECRET);  
+  const { id } = req.params;
+
+  try {
+    const post = await PostService.deletePost(email, id);
+
+    if (!post) return next(err.post.invalid);
+    if (post.unauthorized) return next(err.user.unauthorized);
+    
+    return res.status(204).end();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createPost, getPosts, getPostById, updatePost, deletePost };
