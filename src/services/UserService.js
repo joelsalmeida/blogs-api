@@ -40,4 +40,12 @@ const getUserById = async (id) => {
   }
 };
 
-module.exports = { createUser, getUsers, getUserById, emailAlreadyRegistered };
+const deleteCurrentUser = async (email) => {
+  try {
+    return await User.destroy({ where: { email } });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createUser, getUsers, getUserById, emailAlreadyRegistered, deleteCurrentUser };
