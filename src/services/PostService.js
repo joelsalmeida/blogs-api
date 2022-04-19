@@ -41,4 +41,23 @@ const getPostById = async (id) => {
   }
 };
 
-module.exports = { createPost, getPosts, getPostById };
+const updatePost = async (email, id, updates) => {
+  try {
+    const { dataValues: { id: userId } } = await User.findOne({ where: { email } });
+    
+    const post = async () => BlogPost.findOne({ where: { id },
+      include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories' }],
+    });
+
+    const { dataValues: { userId: postUserId } } = await post();
+    if (postUserId !== userId) return null;
+    
+    await BlogPost.update(updates, { where: { id } });
+    return await post();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createPost, getPosts, getPostById, updatePost };
