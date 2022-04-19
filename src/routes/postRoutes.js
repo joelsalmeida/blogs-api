@@ -28,4 +28,12 @@ router.get(
   PostController.getPostById,
 );
 
+router.put(
+  '/:id',
+  authMiddleware,
+  post.titleValidation,
+  post.contentValidation,
+  PostController.updatePost,
+);
+
 module.exports = router;

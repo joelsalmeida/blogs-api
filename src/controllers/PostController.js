@@ -39,4 +39,22 @@ const getPostById = async (req, res, next) => {
   }
 };
 
-module.exports = { createPost, getPosts, getPostById };
+const updatePost = async (req, res, next) => {
+  const { authorization } = req.headers;
+  const { data: { email } } = jwt.verify(authorization, process.env.JWT_SECRET);
+  
+  const { id } = req.params;
+  const { title, content, categoryIds } = req.body;
+
+  if (categoryIds) return next(err.category.cantBeEdited);
+
+  try {
+    const post = await PostService.updatePost(email, id, { title, content });
+    if (!post) return next(err.user.unauthorized);
+    return res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createPost, getPosts, getPostById, updatePost };
