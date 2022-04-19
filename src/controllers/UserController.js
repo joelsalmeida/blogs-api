@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const UserService = require('../services/UserService');
 const { user } = require('../schemas/userErrors');
 
@@ -33,4 +34,16 @@ const getUserById = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser, getUsers, getUserById };
+const deleteCurrentUser = async (req, res, _next) => {
+  const { authorization } = req.headers;
+  const { data: { email } } = jwt.verify(authorization, process.env.JWT_SECRET);
+
+  try {
+    await UserService.deleteCurrentUser(email);
+    return res.status(204).end();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createUser, getUsers, getUserById, deleteCurrentUser };
