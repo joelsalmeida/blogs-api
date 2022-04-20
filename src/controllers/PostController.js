@@ -39,6 +39,17 @@ const getPostById = async (req, res, next) => {
   }
 };
 
+const getPostsBySearch = async (req, res) => {
+  const { q } = req.query;
+
+  try {
+    const posts = await PostService.getPostsBySearch(q);
+    return res.status(200).json(posts);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const updatePost = async (req, res, next) => {
   const { authorization } = req.headers;
   const { data: { email } } = jwt.verify(authorization, process.env.JWT_SECRET);
@@ -74,4 +85,4 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-module.exports = { createPost, getPosts, getPostById, updatePost, deletePost };
+module.exports = { createPost, getPosts, getPostById, getPostsBySearch, updatePost, deletePost };

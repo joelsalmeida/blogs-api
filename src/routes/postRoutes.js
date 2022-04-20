@@ -23,6 +23,12 @@ router.get(
 );
 
 router.get(
+  '/search',
+  authMiddleware,
+  PostController.getPostsBySearch,
+);
+
+router.get(
   '/:id',
   authMiddleware,
   PostController.getPostById,
