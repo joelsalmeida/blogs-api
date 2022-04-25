@@ -5,7 +5,7 @@ const loginRoutes = require('./src/routes/loginRoutes');
 const categoryRoutes = require('./src/routes/categoryRoutes');
 const postRoutes = require('./src/routes/postRoutes');
 
-const { errorMiddleware } = require('./src/validations/errorMiddleware');
+const { errorMiddleware } = require('./src/middlewares/errorMiddleware');
 
 const app = express();
 app.use(express.json());
