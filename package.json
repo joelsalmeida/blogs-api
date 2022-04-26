@@ -14,6 +14,8 @@
   "scripts": {
     "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate $",
     "start": "node index.js",
+    "create": "npx sequelize-cli db:create $",
+    "migrate": "npx sequelize-cli db:migrate $",
     "drop": "npx sequelize-cli db:drop $",
     "seed": "npx sequelize-cli db:seed:all $",
     "test": "jest --runInBand",
